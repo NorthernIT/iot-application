@@ -15,34 +15,32 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { signUp } from "@/actions/auth.action"
+import { signIn } from "@/actions/auth.action"
 import { toast } from "@/components/ui/use-toast"
 import { useRouter } from "next/navigation"
  
-export const SignUpSchema = z.object({
+export const SignInSchema = z.object({
   username: z.string().min(2).max(50),
-  email: z.string().email("Invalid email"),
   password: z.string().min(8, {message: "Password must be atleast 8 characters long"}),
 })
 
-export function SignUpForm() {
+export function SignInForm() {
   const router = useRouter()
 
   // 1. Define your form.
-  const form = useForm<z.infer<typeof SignUpSchema>>({
-      resolver: zodResolver(SignUpSchema),
+  const form = useForm<z.infer<typeof SignInSchema>>({
+      resolver: zodResolver(SignInSchema),
       defaultValues: {
       username: "",
-      email: "",
       password: "",
       },
   })
 
   // 2. Define a submit handler.
-  async function onSubmit(values: z.infer<typeof SignUpSchema>) {
+  async function onSubmit(values: z.infer<typeof SignInSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    const res = await signUp(values)
+    const res = await signIn(values)
     if(res.error) {
       toast({
         variant: "destructive",
@@ -51,7 +49,7 @@ export function SignUpForm() {
     } else if (res.success) {
       toast({
         variant: "default",
-        description: "Account created successfully",
+        description: "Signed in successfully",
       })
 
       router.push("/")
@@ -71,22 +69,6 @@ export function SignUpForm() {
             </FormControl>
             <FormDescription>
               This is your public display name.
-            </FormDescription>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-      <FormField
-        control={form.control}
-        name="email"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Email</FormLabel>
-            <FormControl>
-              <Input placeholder="JohnDoe@gmail.com" type="email" {...field} />
-            </FormControl>
-            <FormDescription>
-              This is your account email.
             </FormDescription>
             <FormMessage />
           </FormItem>
