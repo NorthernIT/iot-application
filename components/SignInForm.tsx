@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input"
 import { signIn } from "@/actions/auth.action"
 import { toast } from "@/components/ui/use-toast"
 import { useRouter } from "next/navigation"
+import Link from "next/link"
  
 export const SignInSchema = z.object({
   username: z.string().min(2).max(50),
@@ -91,6 +92,11 @@ export function SignInForm() {
         )}
       />
       <Button type="submit">Submit</Button>
+      <div className="mt-4">
+        <Link href="/sign-up" className="underline">
+          Do not have an account? Sign up
+        </Link>
+      </div>
     </form>
   </Form>
   )
