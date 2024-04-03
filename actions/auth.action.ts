@@ -10,6 +10,8 @@ import { lucia, validateRequest } from "@/auth/lucia";
 import { cookies } from "next/headers";
 import { SignInSchema } from "@/components/SignInForm";
 import { eq } from "drizzle-orm"
+import { generateVerificationToken } from "@/util/tokens";
+import { sendVerificationEmail } from "./sendVerificationEmail";
 
 function genAPIKey(): string {
     const apiKeyLength: number = 32; // Length of key
@@ -33,16 +35,35 @@ export const signUp = async (values: z.infer<typeof SignUpSchema>) => {
             apiKey: apiKey
         })
 
-        const session = await lucia.createSession(userID, {
-            expiresIn: 60 * 60 * 24 * 30 // expires in 30 days.
-        })
+        /*
+          Creates verification token
+          Sends email with token to be verified by user
+          Token expires after an hour
+    
+          New tokens can be generated when a user tries to login without being verified
+        */
 
-        const sessionCookie = lucia.createSessionCookie(session.id);
+        // generate new token
+        const token = await generateVerificationToken(values.email,userID);
+        // send verification email with token
+        await sendVerificationEmail(values.email, token.token);
 
-        cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes)
+
+        // const session = await lucia.createSession(userID, {
+        //     expiresIn: 60 * 60 * 24 * 30 // expires in 30 days.
+        // })
+
+        // const sessionCookie = lucia.createSessionCookie(session.id);
+
+        // cookies().set(
+        //     sessionCookie.name,
+        //     sessionCookie.value,
+        //     sessionCookie.attributes
+        // )
 
         return {
             success: true,
+            message: `Verification email sent to ${values.email}`,
             data: {
                 userID,
             },
@@ -65,12 +86,14 @@ export const signIn = async (values: z.infer<typeof SignInSchema>) => {
 
     if (!existingUser) {
         return {
+            status: 400,
             error: "User not found",
         }
     }
 
     if (!existingUser.hashedPassword) {
         return {
+            status: 400,
             error: "User not found",
         }
     }
@@ -82,7 +105,15 @@ export const signIn = async (values: z.infer<typeof SignInSchema>) => {
 
     if (!isValidPassword) {
         return {
+            status: 400,
             error: "Incorrect username or password",
+        }
+    }
+
+    if (!existingUser.verifiedEmail){
+        return {
+            status: 403,
+            error: "Please check your email for verification and verify your account"
         }
     }
 
@@ -95,6 +126,7 @@ export const signIn = async (values: z.infer<typeof SignInSchema>) => {
     cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes)
 
     return {
+        status: 200,
         success: "Logged in successfully",
     }
 }

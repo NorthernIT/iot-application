@@ -42,18 +42,24 @@ export function SignInForm() {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     const res = await signIn(values)
-    if(res.error) {
+    if(res.status == 400) {
       toast({
         variant: "destructive",
         description: res.error,
       })
-    } else if (res.success) {
+    } else if (res.status == 412){
+      toast({
+        variant: "default",
+        title: "You have not verified your email!",
+        description: res.error,
+      })
+    } else if (res.status == 200) {
       toast({
         variant: "default",
         description: "Signed in successfully",
       })
 
-      router.push("/")
+      router.push("/profile")
     }
   }
   return (
