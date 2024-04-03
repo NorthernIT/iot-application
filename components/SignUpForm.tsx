@@ -52,7 +52,7 @@ export function SignUpForm() {
     } else if (res.success) {
       toast({
         variant: "default",
-        description: "Account created successfully",
+        description: res.message,
       })
 
       router.push("/")
