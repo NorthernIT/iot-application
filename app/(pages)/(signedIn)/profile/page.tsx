@@ -3,20 +3,17 @@ import { validateRequest } from "@/auth/lucia";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { redirect } from "next/navigation";
+import UserProfile from "@/components/userProfile";
 
 export default async function profilePage() {
     const { session, user } = await validateRequest()
 
     if (!user || !session ) {
-        redirect("/sign-in")
+        redirect("/auth/sign-in")
     }
     return (
-        <main className="flex min-h-screen flex-col items-center justify-between p-24">
-        <p>Protected route</p>
-        <p>{JSON.stringify(user)}</p>
-        <form action={signOut}>
-            <Button type="submit">Sign out</Button>
-        </form>
+        <main style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", backgroundColor: "blue"}}>
+            <UserProfile user={user} />
         </main>
     );
 }

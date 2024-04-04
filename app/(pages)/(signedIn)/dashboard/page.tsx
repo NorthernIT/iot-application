@@ -4,14 +4,14 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
-export default async function Home() {
+export default async function Dashboard() {
   const { session, user } = await validateRequest()
 
   if (!user || !session) {
     redirect("/auth/sign-in")
   }
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main style={{ display: "flex", justifyContent: "center", height: "100vh", backgroundColor: "blue"}}>
       <h1>This will be the main dashboard</h1>
     </main>
   );
