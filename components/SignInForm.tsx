@@ -47,7 +47,7 @@ export function SignInForm() {
         variant: "destructive",
         description: res.error,
       })
-    } else if (res.status == 412){
+    } else if (res.status == 403){
       toast({
         variant: "default",
         title: "You have not verified your email!",
@@ -59,7 +59,7 @@ export function SignInForm() {
         description: "Signed in successfully",
       })
 
-      router.push("/profile")
+      router.push("/dashboard")
     }
   }
   return (
@@ -99,7 +99,7 @@ export function SignInForm() {
       />
       <Button type="submit">Submit</Button>
       <div className="mt-4">
-        <Link href="/sign-up" className="underline">
+        <Link href="/auth/sign-up" className="underline">
           Do not have an account? Sign up
         </Link>
       </div>

@@ -55,7 +55,7 @@ export function SignUpForm() {
         description: res.message,
       })
 
-      router.push("/")
+      router.push("/auth/sign-in")
     }
   }
 
@@ -112,7 +112,7 @@ export function SignUpForm() {
       />
       <Button type="submit">Submit</Button>
       <div className="mt-4">
-        <Link href="/sign-in" className="underline">
+        <Link href="/auth/sign-in" className="underline">
           Already have an account? Sign in
         </Link>
       </div>
