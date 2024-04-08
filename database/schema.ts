@@ -20,6 +20,17 @@ export const emailVerification = mysqlTable("email_verification", {
     }).notNull(),
 });
 
+export const passwordResetToken = mysqlTable("password_reset_tokens", {
+    id: varchar("id", {
+        length: 15,
+    }).primaryKey(),
+    email: varchar("email", { length: 100 }).notNull(),
+    expires: bigint("active_expires", {
+        mode: "number",
+    }).notNull(),
+    token: varchar("token", { length: 100 }).unique().notNull(),
+});
+
 export const session = mysqlTable("user_sessions", {
     id: varchar("id", {length: 255}).primaryKey(),
     userId: varchar("user_id", {length: 255}).notNull().references(() => user.id),

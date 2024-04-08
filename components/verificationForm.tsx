@@ -32,7 +32,7 @@ const VerificationForm = () => {
             if (data.status === 200) {
                 setSucess(data.message);
                 toast.success("Email Verified!");
-                router.push("/sign-in");
+                router.push("/auth/sign-in");
             } else {
                 setError(data.message);
                 toast.error("An error occured");
