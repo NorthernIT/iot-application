@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -17,8 +16,10 @@ import {
 import { Input } from "@/components/ui/input"
 import { signIn } from "@/actions/auth.action"
 import { toast } from "@/components/ui/use-toast"
+import { Toaster } from "./ui/toaster"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
+import { useRef } from "react"
  
 export const SignInSchema = z.object({
   username: z.string().min(2).max(50),
@@ -30,11 +31,11 @@ export function SignInForm() {
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof SignInSchema>>({
-      resolver: zodResolver(SignInSchema),
-      defaultValues: {
-      username: "",
-      password: "",
-      },
+    resolver: zodResolver(SignInSchema),
+    defaultValues: {
+    username: "",
+    password: "",
+    },
   })
 
   // 2. Define a submit handler.
@@ -42,7 +43,9 @@ export function SignInForm() {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     const res = await signIn(values)
+    // console.log(res.status)
     if(res.status == 400) {
+      // console.log("Made it!")
       toast({
         variant: "destructive",
         description: res.error,
@@ -97,6 +100,11 @@ export function SignInForm() {
           </FormItem>
         )}
       />
+      <div className="text-right">
+        <Link href="/auth/request-pass-reset" className="underline">
+          Forgot Password?
+        </Link>
+      </div>
       <Button type="submit">Submit</Button>
       <div className="mt-4">
         <Link href="/auth/sign-up" className="underline">
@@ -104,6 +112,7 @@ export function SignInForm() {
         </Link>
       </div>
     </form>
+    <Toaster/>
   </Form>
   )
 }

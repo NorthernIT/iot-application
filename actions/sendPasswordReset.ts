@@ -1,0 +1,70 @@
+"use server";
+
+const nodemailer = require("nodemailer");
+
+export const sendPasswordReset = async (email: string, token: string) => {
+    const transporter = nodemailer.createTransport({
+      host: "mail.northernit.ca",
+      port: 465,
+      auth: {
+        user: process.env.NODEMAILER_USER!,
+        pass: process.env.NODEMAILER_PASSWORD!,
+      },
+      secure: true,
+    });
+  
+    // Must wrap the verify and sendMail functions in Promises
+    // Just using a regular await causes everything to hang
+  
+    await new Promise((resolve, reject) => {
+      // verify connection configuration
+      transporter.verify(function (error: any, success: any) {
+        if (error) {
+          console.log(error);
+          reject(error);
+        } else {
+          console.log("Server is ready to take our messages");
+          resolve(success);
+        }
+      });
+    });
+  
+    try {
+      await new Promise((resolve, reject) => {
+        transporter.sendMail(
+          {
+            from: process.env.NODEMAILER_USER!,
+            to: email,
+            subject: "Your password reset link",
+            html:
+              process.env.NODE_ENV === "development"
+                ? `
+        <h1>Click the link below to reset your password</h1>
+        <a href="${process.env.BASE_URL}/auth/password-reset?token=${token}" target="#">Click here to reset</a>
+        `
+                : `
+        <h1>Click the link below to reset your password</h1>
+        <a href="${process.env.BASE_URL}/auth/password-reset?token=${token}" target="#">Click here to reset</a>
+        `,
+          },
+          (err: any, info: any) => {
+            if (err) {
+              console.error(err);
+              reject(err);
+            } else {
+              console.log(info);
+              resolve(info);
+            }
+          }
+        );
+      });
+  
+      return {
+        status: 200,
+        message: "Password reset email sent!",
+      };
+    } catch (error) {
+      console.log(error);
+      return { status: 500, message: "COULD NOT SEND MESSAGE" };
+    }
+};

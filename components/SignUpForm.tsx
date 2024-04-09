@@ -17,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { signUp } from "@/actions/auth.action"
 import { toast } from "@/components/ui/use-toast"
+import { Toaster } from "./ui/toaster"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
  
@@ -117,6 +118,7 @@ export function SignUpForm() {
         </Link>
       </div>
     </form>
+    <Toaster/>
   </Form>
   )
 }
