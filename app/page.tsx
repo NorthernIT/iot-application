@@ -10,6 +10,7 @@ export default async function Home() {
   if (!user || !session) {
     redirect("/auth/sign-in")
   }
+  redirect("/dashboard")
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <h1>This will be the main dashboard</h1>

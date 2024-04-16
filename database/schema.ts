@@ -36,3 +36,13 @@ export const session = mysqlTable("user_sessions", {
     userId: varchar("user_id", {length: 255}).notNull().references(() => user.id),
     expiresAt: datetime("expires_at").notNull()
 });
+
+export const devices = mysqlTable("devices", {
+    deviceEUI: varchar("deviceEUI", {length: 255}).primaryKey(),
+    userId: varchar("user_id", {length: 255}).notNull().references(() => user.id),
+    deviceName: varchar("devName", {length:255}).notNull(),
+    appEUI: varchar("appEUI", {length:255}).notNull(),
+    nwAppKey: varchar("nwAppKey", {length:255}).notNull(),
+    freq: varchar("freq", {length:255}).notNull(),
+    class: varchar("class", {length:255}).notNull()
+})

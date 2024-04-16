@@ -1,8 +1,6 @@
-import { signOut } from "@/actions/auth.action";
 import { validateRequest } from "@/auth/lucia";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 
 export default async function Dashboard() {
   const { session, user } = await validateRequest()
@@ -11,8 +9,12 @@ export default async function Dashboard() {
     redirect("/auth/sign-in")
   }
   return (
-    <main style={{ display: "flex", justifyContent: "center", height: "100vh", backgroundColor: "blue"}}>
-      <h1>This will be the main dashboard</h1>
+    <main className="flex justify-center items-center h-screen bg-teal-500">
+      <div>
+        <Link href="/devices" className="inline-block bg-white rounded-lg py-8 px-8 shadow-lg hover:shadow-xl transition duration-300">
+          Devices
+        </Link>
+      </div>
     </main>
   );
 }
