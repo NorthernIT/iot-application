@@ -1,6 +1,7 @@
 // import PasswordReset from '@/components/Forms/PasswordReset'
 import PasswordReset from '@/components/PasswordReset'
 import React from 'react'
+import { Suspense } from 'react'
 
 const PasswordResetPage = () => {
   return (
@@ -15,7 +16,9 @@ const PasswordResetPage = () => {
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
           Password Reset
         </h2>
-        <PasswordReset />
+        <Suspense>
+          <PasswordReset />
+        </Suspense>
       </div>
     </div>
   )
