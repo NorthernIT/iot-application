@@ -1,4 +1,7 @@
 import Navbar from "@/components/Navbar";
+import dynamic from "next/dynamic";
+
+// const Navbar = dynamic(() =>import('@/components/Navbar'), { ssr: false })
 
 export default function SignedInLayout({
     children,
@@ -6,11 +9,9 @@ export default function SignedInLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <section>
       <Navbar />
-      <div>
-        {children}
-      </div>
-    </html>
+      {children}
+    </section>
   );
 }

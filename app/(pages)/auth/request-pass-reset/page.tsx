@@ -1,15 +1,6 @@
-import { validateRequest } from "@/auth/lucia";
-import { SignInForm } from "@/components/SignInForm";
-import { redirect } from "next/navigation";
+import { ResetPassForm } from "@/components/resetPassRequest";
 
-export default async function SignInPage() {
-
-    const {user} = await validateRequest()
-
-    if (user) {
-        return redirect("/")
-    }
-
+const ReqResetPass = () => {
     return (
         <div className="pt:mt-0 mx-auto flex flex-col items-center justify-center px-6 pt-8 dark:bg-gray-900 md:h-screen">
       <a
@@ -20,10 +11,14 @@ export default async function SignInPage() {
       </a>
       <div className="w-full max-w-xl space-y-8 rounded-lg bg-white p-6 shadow dark:bg-gray-800 sm:p-8">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-          Sign in to your account
+          Password Reset
         </h2>
-        <SignInForm />
+        <h3>Please enter the email that is associated with your account
+        </h3>
+        <ResetPassForm/>
       </div>
     </div>
-    )
+    );
 }
+
+export default ReqResetPass
