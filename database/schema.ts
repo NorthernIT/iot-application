@@ -1,4 +1,4 @@
-import { boolean, datetime,  mysqlTable, bigint, varchar, text  } from "drizzle-orm/mysql-core";
+import { boolean, datetime,  mysqlTable, bigint, varchar, text, int,float, timestamp} from "drizzle-orm/mysql-core";
 
 export const user = mysqlTable("users", {
     // Lucia attributes
@@ -46,3 +46,43 @@ export const devices = mysqlTable("devices", {
     freq: varchar("freq", {length:255}).notNull(),
     class: varchar("class", {length:255}).notNull()
 })
+
+// Below is tables for each device that would be used.
+export const draginoSensor = mysqlTable("draginoSensor", {
+    id: int("id").autoincrement().primaryKey(),
+    time: timestamp("time").notNull().defaultNow(),
+    deviceEUI: varchar("deviceEUI", {length: 255}).notNull(),
+    BatV: float("BatV").notNull(),
+    Bat_status: float("Bat_status").notNull(),
+    Ext_sensor: varchar("Ext_sensor", {length: 255}),
+    Hum_SHT: float("Hum_SHT").notNull(),
+    TempC_DS: float("TempC_DS").notNull(),
+    TempC_SHT: float("TempC_SHT").notNull(),
+    lora_datarate: varchar("lora_datarate", {length:255}),
+    lora_rssi: float("lora_rssi").notNull(),
+    lora_snr: float("lora_snr").notNull()
+});
+
+export const comfortSensor = mysqlTable("comfortSensor", {
+    id: int("id").autoincrement().primaryKey(),
+    time: timestamp("time").notNull().defaultNow(),
+    deviceEUI: varchar("deviceEUI", {length: 255}).notNull(),
+    HUMIDITY: float("HUMIDITY").notNull(),
+    TEMPERATURE: float("TEMPERATURE").notNull(),
+    battery_voltage: float("battery_voltage").notNull(),
+    port: int("port").notNull(),
+    raw: varchar("raw", {length:255}).notNull()
+});
+
+export const netvoxSensor = mysqlTable("netvoxSensor", {
+    id: int("id").autoincrement().primaryKey(),
+    time: timestamp("time").notNull().defaultNow(),
+    deviceEUI: varchar("deviceEUI", {length: 255}).notNull(),
+    BATTERY: float("BATTERY").notNull(),
+    TEMPERATURE: float("TEMPERATURE").notNull(),
+    ILLUMINANCE: float("ILLUMINANCE").notNull(),
+    OCCUPIED: boolean("OCCUPIED").notNull(),
+    LORA_RSSI: float("LORA_RSSI").notNull(),
+    LORA_SNR: float("LORA_SNR").notNull(),
+    LORA_DATARATE: float("LORA_DATARATE").notNull()
+});
