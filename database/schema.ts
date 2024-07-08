@@ -84,5 +84,5 @@ export const netvoxSensor = mysqlTable("netvoxSensor", {
     OCCUPIED: boolean("OCCUPIED").notNull(),
     LORA_RSSI: float("LORA_RSSI").notNull(),
     LORA_SNR: float("LORA_SNR").notNull(),
-    LORA_DATARATE: float("LORA_DATARATE").notNull()
+    LORA_DATARATE: varchar("LORA_DATARATE", {length: 255}).notNull()
 });
