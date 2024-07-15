@@ -10,9 +10,12 @@ export default async function Dashboard() {
   }
   return (
     <main className="flex justify-center items-center h-screen bg-teal-500">
-      <div>
+      <div className="flex space-x-8">
         <Link href="/devices" className="inline-block bg-white rounded-lg py-8 px-8 shadow-lg hover:shadow-xl transition duration-300">
           Devices
+        </Link>
+        <Link href="/netvox-data" className="inline-block bg-white rounded-lg py-8 px-8 shadow-lg hover:shadow-xl transition duration-300">
+          Netvox Data
         </Link>
       </div>
     </main>

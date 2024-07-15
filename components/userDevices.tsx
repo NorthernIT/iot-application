@@ -53,9 +53,11 @@ const UserDevices = ({ user }: { user: any }) => {
                 setShowAddDeviceForm(false); // Hide the add device form after submission
                 fetchDevices(); // Refresh devices
             } else {
-                console.error('Error adding device:', message);
+                toast.error("Error adding device. DevEUI may already be in use");
+                console.log('Error adding device:', message);
             }
         } catch (error) {
+            toast.error("Error adding device");
             console.error('Error adding device:', error);
         }
     };
@@ -92,14 +94,24 @@ const UserDevices = ({ user }: { user: any }) => {
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
                             Name
                         </label>
-                        <input
+                        {/* <input
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="name"
                             type="text"
                             placeholder="Enter Name"
                             value={newDevice.Name}
                             onChange={(e) => setNewDevice({ ...newDevice, Name: e.target.value })}
-                        />
+                        /> */}
+                        <select
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="name"
+                            value={newDevice.Name}
+                            onChange={(e) => setNewDevice({ ...newDevice, Name: e.target.value })}
+                        >
+                            <option value="">Select Name</option>
+                            <option value="dragino-lht65n-temp-hum-79">dragino-lht65n-temp-hum-79</option>
+                            <option value="netvox-rb11e-occupancy-temperaturelight-senso-1">netvox-rb11e-occupancy-temperaturelight-senso-1</option>
+                        </select>
                     </div>
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="appEUI">
