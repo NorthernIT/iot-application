@@ -4,7 +4,7 @@ import { db } from "@/database";
 import { netvoxSensor } from "@/database/schema";
 import { desc } from "drizzle-orm";
 
-export const getNetvoxData = async () => {
+export const getLatestNetvoxData = async () => {
     // get most recent entry in netvox table
     try {
         const result = await db.select({

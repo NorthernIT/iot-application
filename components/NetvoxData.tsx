@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from 'react';
 import styles from '../styles/deviceData.module.css'
-import { getNetvoxData } from '@/actions/deviceData';
+import { getLatestNetvoxData } from '@/actions/netvoxDeviceData';
 
 type NetvoxDataType = {
   time: Date;
@@ -19,7 +19,7 @@ const NetvoxData = () => {
 
   const fetchData = async () =>{
     try{
-      const result = await getNetvoxData();
+      const result = await getLatestNetvoxData();
       if (result.status == 200 && result.result && result.result.length > 0) {
         setNetvoxData(result.result[0]);
       } else {
@@ -38,7 +38,7 @@ const NetvoxData = () => {
   return(
     <div className={styles.container}>
       <div className={styles.timestampBox}>
-        <p>Time: {netvoxData?.time ? new Date(netvoxData.time).toString() : 'N/A'}</p>
+        <p>Time: {netvoxData?.time.toUTCString() ?? 'N/A'}</p>
       </div>
       <h1>Latest Data</h1>
       <div className={styles.grid}>
