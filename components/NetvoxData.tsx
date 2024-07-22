@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from 'react';
 import styles from '../styles/deviceData.module.css'
-import { getLatestNetvoxData } from '@/actions/netvoxDeviceData';
+import { getLatestNetvoxData, getNetvoxTimes, getNetvoxData } from '@/actions/netvoxDeviceData';
 
 type NetvoxDataType = {
   time: Date;
@@ -16,31 +16,77 @@ type NetvoxDataType = {
 
 const NetvoxData = () => {
   const [netvoxData, setNetvoxData] = useState<NetvoxDataType | null>(null);
+  const [netvoxTimes, setNetvoxTimes] = useState<Date[]>([]);
+  const [selectedTime, setSelectedTime] = useState<Date | null>(null);
 
-  const fetchData = async () =>{
-    try{
-      const result = await getLatestNetvoxData();
-      if (result.status == 200 && result.result && result.result.length > 0) {
+  // Fetched all times for drop down
+  const fetchTimes = async () => {
+    try {
+      const result = await getNetvoxTimes();
+      if (result.status === 200 && result.result) {
+        setNetvoxTimes(result.result.map(entry => entry.time));
+      } else {
+        console.error("Error getting times");
+      }
+    } catch (error: any) {
+      console.error("Error getting times", error);
+    }
+  }
+
+  // Fetch data for specified time or get latest if time not given
+  const fetchData = async (time: Date | null) => {
+    try {
+      const result = await (time ? getNetvoxData(time): getLatestNetvoxData());
+      if (result.status == 200 && result.result) {
         setNetvoxData(result.result[0]);
       } else {
-        console.error("error getting data");
+        console.error("Error fetching data");
       }
-    } catch (error: any){
-      console.error("error getting data", error);
-    } 
+    } catch (error: any) {
+      console.error("Error fetching data");
+    }
   }
 
   useEffect(() => {
-    fetchData();
-  },[]);
+    const initializeData = async () => {
+      await fetchTimes();
+      const latestData = await getLatestNetvoxData();
+      if (latestData.status == 200 && latestData.result) {
+        setNetvoxData(latestData.result[0]);
+        setSelectedTime(latestData.result[0].time);
+      } else {
+        console.error("Error initializing data!");
+      }
+    };
+    initializeData();
+  }, []);
+
+  // Effect depends on selectedTime
+  // If selectedTime is changed then this effect is
+  useEffect(() => {
+    if(selectedTime) {
+      fetchData(selectedTime);
+    }
+  }, [selectedTime]);
+
+  const handleTimeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedTimeValue = event.target.value;
+    setSelectedTime(new Date(selectedTimeValue));
+  };
 
 
   return(
     <div className={styles.container}>
       <div className={styles.timestampBox}>
-        <p>Time: {netvoxData?.time.toUTCString() ?? 'N/A'}</p>
+        <label htmlFor="timeSelect">Time: </label>
+        <select id="timeSelect" onChange={handleTimeChange} value={selectedTime?.toISOString() ?? ''}>
+          {netvoxTimes.map((time, index) => (
+            <option key={index} value={time.toISOString()}>
+              {time.toTimeString()}
+            </option>
+          ))}
+        </select>
       </div>
-      <h1>Latest Data</h1>
       <div className={styles.grid}>
         <div className={styles.card}>
           <h2>Battery</h2>
