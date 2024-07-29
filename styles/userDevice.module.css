@@ -1,0 +1,86 @@
+.tableEntry {
+    border-top-width: 0;
+    padding-left: 1.5rem; /* 24px */
+    padding-right: 1.5rem; /* 24px */
+    vertical-align: middle;
+    border-left-width: 0;
+    border-right-width: 0;
+    font-size: 0.75rem; /* 12px */
+    white-space: nowrap;
+    padding: 1rem; /* 16px */
+    text-align: left;
+    color: #4a5568; /* text-blueGray-700 */
+}
+
+.tableHeaders {
+    padding-left: 1.5rem; /* 24px */
+    padding-right: 1.5rem; /* 24px */
+    background-color: #f8fafc; /* bg-blueGray-50 */
+    color: #6b7280; /* text-blueGray-500 */
+    vertical-align: middle;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #e5e7eb; /* border-blueGray-100 */
+    padding-top: 0.75rem; /* 12px */
+    padding-bottom: 0.75rem; /* 12px */
+    font-size: 0.75rem; /* 12px */
+    text-transform: uppercase;
+    border-left-width: 0;
+    border-right-width: 0;
+    white-space: nowrap;
+    font-weight: 600; /* font-semibold */
+    text-align: left;
+}
+
+.formInput {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06); /* shadow */
+    appearance: none; /* appearance-none */
+    border-width: 1px; /* border */
+    border-style: solid; /* border */
+    border-radius: 0.25rem; /* rounded */
+    width: 100%; /* w-full */
+    padding-top: 0.5rem; /* 8px, py-2 */
+    padding-bottom: 0.5rem; /* 8px, py-2 */
+    padding-left: 0.75rem; /* 12px, px-3 */
+    padding-right: 0.75rem; /* 12px, px-3 */
+    color: #4a5568; /* text-gray-700 */
+    line-height: 1.25; /* leading-tight */
+    outline: none; /* focus:outline-none */
+}
+
+.formInput:focus {
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5); /* focus:shadow-outline */
+    outline: none; /* focus:outline-none */
+}
+.formLabel {
+    display: block; /* block */
+    color: #4a5568; /* text-gray-700 */
+    font-size: 0.875rem; /* text-sm, 14px */
+    font-weight: 700; /* font-bold */
+    margin-bottom: 0.5rem; /* mb-2, 8px */
+}
+
+.tableButton {
+    background-color: #6366f1; /* bg-indigo-500 */
+    color: #ffffff; /* text-white */
+    font-size: 0.75rem; /* text-xs, 12px */
+    font-weight: 700; /* font-bold */
+    text-transform: uppercase; /* uppercase */
+    padding-left: 0.75rem; /* px-3, 12px */
+    padding-right: 0.75rem; /* px-3, 12px */
+    padding-top: 0.25rem; /* py-1, 4px */
+    padding-bottom: 0.25rem; /* py-1, 4px */
+    border-radius: 0.25rem; /* rounded */
+    outline: none; /* outline-none */
+    margin-right: 0.25rem; /* mr-1, 4px */
+    margin-bottom: 0.25rem; /* mb-1, 4px */
+    transition: all 0.15s ease-linear; /* ease-linear transition-all duration-150 */
+}
+
+.tableButton:active {
+    background-color: #4f46e5; /* active:bg-indigo-600 */
+}
+
+.tableButton:focus {
+    outline: none; /* focus:outline-none */
+}

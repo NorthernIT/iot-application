@@ -2,6 +2,7 @@
 import React, {useState, useEffect} from "react";
 import { addDevice, getUserDevices } from "@/actions/deviceActions";
 import toast, { Toaster } from "react-hot-toast";
+import styles from "@/styles/userDevice.module.css"
 
 const UserDevices = ({ user }: { user: any }) => {
     const [devices, setDevices] = useState<any[]>([]); // State to hold devices
@@ -78,11 +79,11 @@ const UserDevices = ({ user }: { user: any }) => {
                 <div className="max-w-md mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                     <h2 className="text-2xl font-bold mb-4">Add New Device</h2>
                     <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="devEUI">
+                        <label className={styles.formLabel} htmlFor="devEUI">
                             DevEUI
                         </label>
                         <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            className={styles.formInput}
                             id="devEUI"
                             type="text"
                             placeholder="Enter DevEUI"
@@ -91,19 +92,11 @@ const UserDevices = ({ user }: { user: any }) => {
                         />
                     </div>
                     <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
+                        <label className={styles.formLabel}  htmlFor="name">
                             Name
                         </label>
-                        {/* <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="name"
-                            type="text"
-                            placeholder="Enter Name"
-                            value={newDevice.Name}
-                            onChange={(e) => setNewDevice({ ...newDevice, Name: e.target.value })}
-                        /> */}
                         <select
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            className={styles.formInput}
                             id="name"
                             value={newDevice.Name}
                             onChange={(e) => setNewDevice({ ...newDevice, Name: e.target.value })}
@@ -114,11 +107,11 @@ const UserDevices = ({ user }: { user: any }) => {
                         </select>
                     </div>
                     <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="appEUI">
+                        <label className={styles.formLabel}  htmlFor="appEUI">
                             AppEUI
                         </label>
                         <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            className={styles.formInput}
                             id="appEUI"
                             type="text"
                             placeholder="Enter AppEUI"
@@ -127,11 +120,11 @@ const UserDevices = ({ user }: { user: any }) => {
                         />
                     </div>
                     <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="NwAppKey">
+                        <label className={styles.formLabel}  htmlFor="NwAppKey">
                             NwAppKey
                         </label>
                         <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            className={styles.formInput}
                             id="NwAppKey"
                             type="text"
                             placeholder="Enter NwAppKey"
@@ -140,11 +133,11 @@ const UserDevices = ({ user }: { user: any }) => {
                         />
                     </div>
                     <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="Freq">
+                        <label className={styles.formLabel}  htmlFor="Freq">
                             Freq
                         </label>
                         <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            className={styles.formInput}
                             id="Freq"
                             type="text"
                             placeholder="Enter Freq"
@@ -153,11 +146,11 @@ const UserDevices = ({ user }: { user: any }) => {
                         />
                     </div>
                     <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="Class">
+                        <label className={styles.formLabel}  htmlFor="Class">
                         Class
                         </label>
                         <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            className={styles.formInput}
                             id="Class"
                             type="text"
                             placeholder="Enter Class"
@@ -195,7 +188,7 @@ const UserDevices = ({ user }: { user: any }) => {
                                 <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
                                 <button 
                                     onClick={() => setShowAddDeviceForm(true)}
-                                    className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                    className={styles.tableButton}
                                     >
                                         + Add Device
                                 </button>
@@ -207,22 +200,22 @@ const UserDevices = ({ user }: { user: any }) => {
                             <table className="items-center bg-transparent w-full border-collapse">
                                 <thead>
                                     <tr>
-                                        <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                        <th className={styles.tableHeaders}>
                                             DevEUI
                                         </th>
-                                        <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                        <th className={styles.tableHeaders}>
                                             Name
                                         </th>
-                                        <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                        <th className={styles.tableHeaders}>
                                             AppEUI
                                         </th>
-                                        <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                        <th className={styles.tableHeaders}>
                                             NwAppKey
                                         </th>
-                                        <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                        <th className={styles.tableHeaders}>
                                             Freq
                                         </th>
-                                        <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                        <th className={styles.tableHeaders}>
                                             Class
                                         </th>
                                     </tr>
@@ -230,12 +223,12 @@ const UserDevices = ({ user }: { user: any }) => {
                                 <tbody>
                                     {devices.map((device, index) => (
                                         <tr key={index}>
-                                            <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700">{device.DevEUI}</td>
-                                            <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">{device.Name}</td>
-                                            <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">{device.AppEUI}</td>
-                                            <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">{device.NwAppKey}</td>
-                                            <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">{device.Freq}</td>
-                                            <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">{device.Class}</td>
+                                            <td className={styles.tableEntry}>{device.DevEUI}</td>
+                                            <td className={styles.tableEntry}>{device.Name}</td>
+                                            <td className={styles.tableEntry}>{device.AppEUI}</td>
+                                            <td className={styles.tableEntry}>{device.NwAppKey}</td>
+                                            <td className={styles.tableEntry}>{device.Freq}</td>
+                                            <td className={styles.tableEntry}>{device.Class}</td>
                                         </tr>
                                     ))}
                                 </tbody>
