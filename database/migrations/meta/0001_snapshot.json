@@ -1,0 +1,555 @@
+{
+  "version": "5",
+  "dialect": "mysql",
+  "id": "91959ce9-e97f-465e-8119-ed8a47b8b71f",
+  "prevId": "3ab8b4c3-17ff-4f27-bcde-e722a35ac768",
+  "tables": {
+    "comfortSensor": {
+      "name": "comfortSensor",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "deviceEUI": {
+          "name": "deviceEUI",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "HUMIDITY": {
+          "name": "HUMIDITY",
+          "type": "float",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "TEMPERATURE": {
+          "name": "TEMPERATURE",
+          "type": "float",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "battery_voltage": {
+          "name": "battery_voltage",
+          "type": "float",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "port": {
+          "name": "port",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "raw": {
+          "name": "raw",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "comfortSensor_id": {
+          "name": "comfortSensor_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "devices": {
+      "name": "devices",
+      "columns": {
+        "deviceEUI": {
+          "name": "deviceEUI",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "devName": {
+          "name": "devName",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "appEUI": {
+          "name": "appEUI",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "nwAppKey": {
+          "name": "nwAppKey",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "freq": {
+          "name": "freq",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "class": {
+          "name": "class",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "devices_user_id_users_id_fk": {
+          "name": "devices_user_id_users_id_fk",
+          "tableFrom": "devices",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "devices_deviceEUI": {
+          "name": "devices_deviceEUI",
+          "columns": [
+            "deviceEUI"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "draginoSensor": {
+      "name": "draginoSensor",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "deviceEUI": {
+          "name": "deviceEUI",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "BatV": {
+          "name": "BatV",
+          "type": "float",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "Bat_status": {
+          "name": "Bat_status",
+          "type": "float",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "Ext_sensor": {
+          "name": "Ext_sensor",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "Hum_SHT": {
+          "name": "Hum_SHT",
+          "type": "float",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "TempC_DS": {
+          "name": "TempC_DS",
+          "type": "float",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "TempC_SHT": {
+          "name": "TempC_SHT",
+          "type": "float",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "lora_datarate": {
+          "name": "lora_datarate",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "lora_rssi": {
+          "name": "lora_rssi",
+          "type": "float",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "lora_snr": {
+          "name": "lora_snr",
+          "type": "float",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "draginoSensor_id": {
+          "name": "draginoSensor_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "email_verification": {
+      "name": "email_verification",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(15)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "token": {
+          "name": "token",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "active_expires": {
+          "name": "active_expires",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "email_verification_id": {
+          "name": "email_verification_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "email_verification_token_unique": {
+          "name": "email_verification_token_unique",
+          "columns": [
+            "token"
+          ]
+        }
+      }
+    },
+    "netvoxSensor": {
+      "name": "netvoxSensor",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "deviceEUI": {
+          "name": "deviceEUI",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "BATTERY": {
+          "name": "BATTERY",
+          "type": "float",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "TEMPERATURE": {
+          "name": "TEMPERATURE",
+          "type": "float",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "ILLUMINANCE": {
+          "name": "ILLUMINANCE",
+          "type": "float",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "OCCUPIED": {
+          "name": "OCCUPIED",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "LORA_RSSI": {
+          "name": "LORA_RSSI",
+          "type": "float",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "LORA_SNR": {
+          "name": "LORA_SNR",
+          "type": "float",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "LORA_DATARATE": {
+          "name": "LORA_DATARATE",
+          "type": "float",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "netvoxSensor_id": {
+          "name": "netvoxSensor_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "password_reset_tokens": {
+      "name": "password_reset_tokens",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(15)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "active_expires": {
+          "name": "active_expires",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "token": {
+          "name": "token",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "password_reset_tokens_id": {
+          "name": "password_reset_tokens_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "password_reset_tokens_token_unique": {
+          "name": "password_reset_tokens_token_unique",
+          "columns": [
+            "token"
+          ]
+        }
+      }
+    },
+    "user_sessions": {
+      "name": "user_sessions",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "user_sessions_user_id_users_id_fk": {
+          "name": "user_sessions_user_id_users_id_fk",
+          "tableFrom": "user_sessions",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "user_sessions_id": {
+          "name": "user_sessions_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "users": {
+      "name": "users",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(15)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "username": {
+          "name": "username",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "verified_email": {
+          "name": "verified_email",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": false
+        },
+        "hashed_password": {
+          "name": "hashed_password",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "apiKey": {
+          "name": "apiKey",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "users_id": {
+          "name": "users_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "users_email_unique": {
+          "name": "users_email_unique",
+          "columns": [
+            "email"
+          ]
+        },
+        "users_username_unique": {
+          "name": "users_username_unique",
+          "columns": [
+            "username"
+          ]
+        }
+      }
+    }
+  },
+  "schemas": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  }
+}
