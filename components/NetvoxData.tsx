@@ -102,7 +102,7 @@ const NetvoxData = () => {
         </div>
         <div className={styles.card}>
           <h2>Occupied</h2>
-          <p>{netvoxData?.OCCUPIED ? 'Yes':'No' ?? 'N/A'}</p>
+          <p>{netvoxData?.OCCUPIED ? 'Yes':'No'}</p>
         </div>
         <div className={styles.card}>
           <h2>LORA RSSI</h2>
